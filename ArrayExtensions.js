@@ -1,4 +1,8 @@
 
+var ExtendArray = (function () {
+
+}(ExtendArray));
+
 
 var AEx = Array.prototype; //Array Extention
 //consider using the each() method for iterating through the array  for each of the functions
@@ -15,7 +19,7 @@ var nonFunction = function (spec) { //check if spec is a value and return it as 
 
       return compare;
 
-    };
+};
 
 var substractFunc =  function(a,b) {
 	return a - b;
@@ -47,7 +51,7 @@ AEx.where = function (callback) {
 	return buffer;
 };
 
-AEx.any = function(callback){
+AEx.any = function (callback) {
 
     var spec = (_isFunction(callback)) ? callback : nonFunction(callback),
 		i;
@@ -60,7 +64,7 @@ AEx.any = function(callback){
 	return false;
 };
 
-AEx.select = function(callback){
+AEx.select = function (callback) {
 	var buffer = [],
 		i;
 	for(i = 0; i < this.length; i += 1){
@@ -71,13 +75,15 @@ AEx.select = function(callback){
 	return buffer;
 };
 
-AEx.take = function(howMany, callback){
+AEx.take = function (howMany, callback) {
 	var buffer = [],
 		check = 0,
 		i;
 	for(i = 0; i < this.length; i += 1){
 
-		if (check >= howMany) return buffer;
+		if (check >= howMany) {
+            return buffer;
+        }
 		
 		var ans = callback.call(this, this[i]);
 		
@@ -238,6 +244,15 @@ AEx.min = function (callback) {
 
 };
 
+AEx.flatten = function() {
+    var i,
+    buffer = [];
+    buffer = this.reduce(function flat(a,b){ //current ,previous values
+		return a.concat(_isArray(b) ? b.reduce(flat,[]) : b);
+    },[]);
+    return buffer;
+};
+
 
 var people = [
 	{name: 'pedro', age: 119 },
@@ -353,3 +368,5 @@ console.log("PROBLEM #14");
 console.log([11, 3, 0, 7, 9, 11, 1, 4, 6].min());
 console.log(children.min(function(a, b){ return a.name.length - b.name.length; }).name);
 console.log(people.min(function(a, b){ return a.age - b.age; }).name);
+console.log("PROBLEM #15");
+console.log([1,2,3,[4,5,[6, 7, 8], 9, [[10, 11], 12], 13, 14], 15, 16].flatten());
