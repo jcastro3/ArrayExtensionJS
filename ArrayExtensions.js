@@ -92,20 +92,19 @@
 
 
     };
-//refactorize
+    
     AEx.first = function (spec) {
         var buffer = [],
             length = this.length,
             i;
         if (!this.length) {
             return null;
+        } else if (!isFunction(spec)) {
+            return this[length - 1];
         }
         for (i = 0; i < length; i += 1) {
-            if (isFunction(spec)) {
-                spec.call(this, this[i]);
-            } else {
-                return this[i];
-            }
+            
+            
             if (spec.call(this, this[i])) {
                 return this[i];
             }
@@ -118,27 +117,20 @@
             i;
         if (!this.length) {
             return null;
-        } //fix this will return null op will continue
+        } else if (!isFunction(spec)) {
+            return this[length - 1];
+        }
         for (i = length - 1; i > 0; i -= 1) {
-
-            if (isFunction(spec)) {
-                spec.call(this, this[i]);
-            } else {
-                return this[i];
-            }
-
             if (spec.call(this, this[i])) {
                 return this[i];
             }
         }
     };
-    //fix this
+
     AEx.count = function(spec){
         var cont = 0,
             i;
-        if (isFunction(spec)) {
-            spec = spec;
-        } else {
+        if (!isFunction(spec)) {
             return this.length;
         }
 
@@ -161,7 +153,7 @@
         }
         return -1;
     };
-   //WRONG!!!!!! : c 
+
     AEx.pluck = function (name) {
 
         var buffer = [],
@@ -192,9 +184,7 @@
             exp,
             tmpMax,
             res = 0;
-        if (!this.length) {
-            return null;
-        }
+        
         if (!this.length) {
             return null;
         }
@@ -232,9 +222,10 @@
         var i,
             buffer = [];
         
-        buffer = this.reduce(function flat(a,b){ //current ,previous values
-            return a.concat(isArray(b) ? b.reduce(flat, []) : b);
+        buffer = this.reduce(function flat(a, b) { //current ,previous values
+            return a.concat(isArray(b) ? b.reduce(flat, []) : [b]);
         }, []);
         return buffer;
     };
+    
 }(Array.prototype));

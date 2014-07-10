@@ -36,14 +36,12 @@ people.each(function(x,i){ console.log((i + 1) + '.- ' + x.name + ' is ' + x.age
  	return skills.length === 0;
  }).each(logPerson);
 
- peopleSkills
- 			.where(function(dev){
- 			    return !dev.skills.any('C#');
- 			})
- 			.each(logPerson);
+console.log('PROBLEM #3');
+peopleSkills
+    .where(function (dev) { return !dev.skills.any('C#'); }).each(logPerson);
 
-
- peopleSkills
+console.log('PROBLEM #4');
+peopleSkills
      .where(function(dev){
          return !dev.skills.any('C#');
      })
@@ -117,4 +115,4 @@ console.log("PROBLEM #14");
     console.log(people.min(function(a, b){ return a.age - b.age; }).name);
 
 console.log("PROBLEM #15");
-    console.log([1,2,3,[4,5,[6, 7, 8], 9, [10, 11, 12], 13, 14], 15, 16].flatten());
+    console.log([1,2,3,[4,5,[6, 7, 8], 9, [[10, 11], 12], 13, 14], 15, 16].flatten());
