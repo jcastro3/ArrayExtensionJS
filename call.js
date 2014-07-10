@@ -66,40 +66,40 @@ var children = [
     {name: 'ss', sex: 'f'},
     {name: 'martin', sex: 'm'}];
 
- console.log('PROBLEM #5');
- children
- .take(3, function(x){ return x.sex == 'f'; })
- .each(function(x){ console.log(x.name); });
+console.log('PROBLEM #5');
+    children
+        .take(3, function(x){ return x.sex == 'f'; })
+        .each(function(x){ console.log(x.name); });
 
- console.log("PROBLEM #6");
- children
-     .skip(3).each(function(x){ console.log(x.name); });
+console.log("PROBLEM #6");
+    children
+        .skip(3).each(function(x){ console.log(x.name); });
 
 
 console.log("PROBLEM #7");
-console.log(children.first().name); 
-console.log(children.first(function(x){ return x.sex == 'm';}).name);
+    console.log(children.first().name); 
+    console.log(children.first(function(x){ return x.sex == 'm';}).name);
 
 
 console.log("PROBLEM #8");
-console.log(children.last().name);
-console.log(children.last(function(x){ return x.sex == 'f';}).name);
+    console.log(children.last().name);
+    console.log(children.last(function(x){ return x.sex == 'f';}).name);
 
 
- console.log("PROBLEM #9");
+console.log("PROBLEM #9");
     console.log(children.count() +  ' children');
     console.log(children.count(function(x){ return x.sex === 'f';}) + ' are female');
 
 
- console.log("PROBLEM #10");
+console.log("PROBLEM #10");
     console.log(children.index( function(x) { return x.name == 'bany'; }));
     console.log(children.index( function(x) { return x.name == 'mark'; }));
     console.log([1,3,5,7,9,11].index(7));
 
- console.log("PROBLEM #11");
- children
- 	.pluck('sex')
- 	.each(function(x){ console.log(x);});
+console.log("PROBLEM #11");
+    children
+ 	  .pluck('sex')
+ 	  .each(function(x){ console.log(x);});
 
 
  console.log("PROBLEM #12");
@@ -117,4 +117,4 @@ console.log("PROBLEM #14");
     console.log(people.min(function(a, b){ return a.age - b.age; }).name);
 
 console.log("PROBLEM #15");
-    console.log([1,2,3,[4,5,[6, 7, 8], 9, [[10, 11], 12], 13, 14], 15, 16].flatten());
+    console.log([1,2,3,[4,5,[6, 7, 8], 9, [10, 11, 12], 13, 14], 15, 16].flatten());

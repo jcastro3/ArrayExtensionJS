@@ -167,7 +167,7 @@
         var buffer = [],
             i;
         for (i = 0; i < this.length; i += 1) {
-            buffer.push(this[i].name);
+            buffer.push(this[i][name]);
         }
         return buffer;
     };
