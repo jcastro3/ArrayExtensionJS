@@ -1,42 +1,47 @@
-//order an array of obj by prop value decending accending
+//order an array of obj by prop value decending ascending
 //firstOrDefault lastOrDafault
-//
+
 
 var people = [
 	{name: 'pedro', age: 119 },
 	{name: 'juan', age: 5 },
 	{name: 'min', age: 16 },
-	{name: 'pancho', age: 20 },
+	{name: 'astrid', age: 20 },
 	{name: 'topo', age: 18 }
 ];
 
 
-// var logPerson = function(x, i){	console.log((i + 1) + '.'+ x.name + ' is ' + x.age + ' years old')};
 
 var peopleSkills = [
-{name: 'pedro', age: 29, skills: ['C#', 'Asp.Net', 'OOP'] },
-{name: 'juan', age: 23, skills: ['PHP', 'Drink tea'] },
-{name: 'pablo', age: 26, skills: ['RoR', 'HTML/CSS'] }
+    {name: 'pedro', age: 29, skills: ['C#', 'Asp.Net', 'OOP'] },
+    {name: 'juan', age: 23, skills: ['PHP', 'Drink tea'] },
+    {name: 'pablo', age: 26, skills: ['RoR', 'HTML/CSS'] }
 ];
 
+
+var children = [
+    {name: 'ana', sex: 'f'},
+    {name: 'fosto', sex: 'm'},
+    {name: 'jane', sex: 'f'},
+    {name: 'yadaaai', sex: 'f'},
+    {name: 'lili', sex: 'f'},
+    {name: 'bany', sex: 'm'},
+    {name: 'rod', sex: null},
+    {name: 'ss', sex: 'f'},
+    {name: 'martin', sex: 'm'}
+];
 
 
 console.log('Hire the following guys');
 
 console.log('#1 EACH');
-people.each(function(x,i){ console.log((i + 1) + '.- ' + x.name + ' is ' + x.age +  ' years old'); });
-
- var logPerson = function(x, i){
-   console.log((i + 1) + '. ' + x.name + ' is ' + x.age + ' years old');
- };
-
-
- peopleSkills.where(function(dev){
- 	var skills = dev.skills.where(function(skill) { return skill === 'PHP'; });
- 	return skills.length === 0;
- }).each(logPerson);
+people.each(function (x, i) { console.log((i + 1) + '.- ' + x.name + ' is ' + x.age +  ' years old'); });
+var logPerson = function (x, i) { console.log((i + 1) + '. ' + x.name + ' is ' + x.age + ' years old'); };
 
 console.log('PROBLEM #3');
+peopleSkills.where(function (dev) { var skills = dev.skills.where(function(skill) { return skill === 'PHP'; }); return skills.length === 0; }).each(logPerson);
+
+
 peopleSkills
     .where(function (dev) { return !dev.skills.any('C#'); }).each(logPerson);
 
@@ -53,16 +58,7 @@ peopleSkills
      });
 
 
-var children = [
-    {name: 'ana', sex: 'f'},
-    {name: 'fosto', sex: 'm'},
-    {name: 'jane', sex: 'f'},
-    {name: 'yadaaai', sex: 'f'},
-    {name: 'lili', sex: 'f'},
-    {name: 'bany', sex: 'm'},
-    {name: 'rod', sex: null},
-    {name: 'ss', sex: 'f'},
-    {name: 'martin', sex: 'm'}];
+
 
 console.log('PROBLEM #5');
     children
@@ -116,3 +112,10 @@ console.log("PROBLEM #14");
 
 console.log("PROBLEM #15");
     console.log([1,2,3,[4,5,[6, 7, 8], 9, [[10, 11], 12], 13, 14], 15, 16].flatten());
+
+
+console.log('PROBLEM #16');
+    console.log(people.orderByAsc());
+
+console.log('PROBLEM #17');
+    console.log(children.orderByDesc());

@@ -64,7 +64,7 @@
         }
         return buffer;
     };
-
+    //make a function that will let you take how many and leave the spec out of it
     AEx.take = function (howMany, spec) {
         var buffer = [],
             check = 0,
@@ -73,8 +73,6 @@
             if (check >= howMany) {
                 return buffer;
             }
-            spec.call(this, this[i]);
-
             if (spec.call(this, this[i])) {
                 buffer.push(this[i]);
                 check += 1;
@@ -127,8 +125,8 @@
         }
     };
 
-    AEx.count = function(spec){
-        var cont = 0,
+    AEx.count = function (spec) {
+        var count = 0,
             i;
         if (!isFunction(spec)) {
             return this.length;
@@ -136,10 +134,10 @@
 
         for (i = 0; i < this.length; i += 1) {
             if (spec.call(this, this[i])) {
-                cont += 1;
+                count += 1;
             }
         }
-        return cont;
+        return count;
     };
 
     AEx.index = function (spec) {
@@ -219,13 +217,59 @@
     };
 
     AEx.flatten = function () {
-        var i,
-            buffer = [];
-        
+        var buffer = [];
         buffer = this.reduce(function flat(a, b) { //current ,previous values
             return a.concat(isArray(b) ? b.reduce(flat, []) : [b]);
         }, []);
         return buffer;
     };
+    
+    //order an array of obj by the prop value selected either in  decending or ascending order
+    AEx.orderByAsc = function (spec) {
+        //use sort(function(){})
+        var buffer = [];
+        buffer = this.sort(
+            function (a, b) {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                if (a.name > b.name) {
+                    return 1;
+                }
+                return 0;
+            }
+        );
+        return buffer;
+    };
+    
+    AEx.orderByDesc = function () {
+        var buffer = [];
+        buffer = this.sort(
+            function (a, b) {
+                if (a.name < b.name) {
+                    return 1;
+                }
+                if (a.name > b.name) {
+                    return -1;
+                }
+                return 0;
+            }
+        );
+        return buffer;
+    };
+    
+    AEx.firstOrDefault = function () {
+    
+    };
+    
+    AEx.lastOrDefault = function () {
+    
+    };
+    
+    AEx.distinct = function () {
+    
+    };
+    
+    
     
 }(Array.prototype));
