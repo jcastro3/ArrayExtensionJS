@@ -224,50 +224,82 @@
         return buffer;
     };
     
+
     //order an array of obj by the prop value selected either in  decending or ascending order
-    AEx.orderByAsc = function (spec) {
+    AEx.orderByAsc = function (propName) {
         //use sort(function(){})
-        var buffer = [];
-        buffer = this.sort(
+        //if property does not exist return null
+        if (!this[0].hasOwnProperty(propName)) {
+            return null;
+        }
+        var order = []; //change buffer name
+        order = this.sort(
             function (a, b) {
-                if (a.name < b.name) {
-                    return -1;
+                
+                if (typeof a[propName] === 'string') {
+                    return (a[propName] < b[propName]) ? -1 : (a[propName] > b[propName]) ? 1 : 0;
+                } else {
+                    return a[propName] - b[propName];
                 }
-                if (a.name > b.name) {
-                    return 1;
-                }
-                return 0;
             }
         );
-        return buffer;
+        return order;
     };
-    
-    AEx.orderByDesc = function () {
-        var buffer = [];
-        buffer = this.sort(
+    //
+    AEx.orderByDesc = function (propName) {
+        var order = [];
+        
+        if (!this[0].hasOwnProperty(propName)) {
+            return null;
+        }
+        
+        order = this.sort(
             function (a, b) {
-                if (a.name < b.name) {
-                    return 1;
+                if (typeof a[propName] === 'string') {
+                    return (a[propName] < b[propName]) ? 1 : (a[propName] > b[propName]) ? -1 : 0;
+                } else {
+                    return b[propName] - a[propName];
                 }
-                if (a.name > b.name) {
-                    return -1;
-                }
-                return 0;
             }
         );
-        return buffer;
+        return order;
     };
     
-    AEx.firstOrDefault = function () {
-    
+    AEx.firstOrDefault = function (spec) {
+//            will get first element that satisfies  the condition if not vallue is faound then defaul will be return
+        var i;
+        for (i = 0; i < this.length; i += 1) {
+            if (spec.call(this, this[i])) {
+                return this[i];
+            }
+        }
+        return null;
     };
     
-    AEx.lastOrDefault = function () {
-    
+    AEx.lastOrDefault = function (spec) {
+        var i;
+        for (i = this.length - 1; i > 0; i -= 1) {
+            if (spec.call(this, this[i])) {
+                return this[i];
+            }
+        }
+        return null;
     };
     
-    AEx.distinct = function () {
-    
+    AEx.distinct = function (spec) {
+        var result = this.sort(function (a, b) { return a.name !== b.name; }),
+            i,
+            con;
+        for (i = 0; i < result.length; ) {
+            if(result[i - 1] == result[i]) {
+                result.splice(i,1);
+            } else {
+                i += 1;
+            }
+            
+        }
+        return result;
+       
     };
     
     

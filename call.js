@@ -115,7 +115,16 @@ console.log("PROBLEM #15");
 
 
 console.log('PROBLEM #16');
-    console.log(people.orderByAsc());
+    console.log(people.orderByAsc('name'));
 
 console.log('PROBLEM #17');
-    console.log(children.orderByDesc());
+    console.log(children.orderByDesc('name'));
+
+console.log('PROBLEM #18');
+    console.log(people.firstOrDefault(function(a){ return a.age === 20; }));
+console.log('PROBLEM #19');
+    console.log(people.lastOrDefault(function(a){ return a.name === 5; }));
+
+var compare = [{name: 'tony'}, {name: 'july'}, {name: 'tony'}];
+console.log('PROBLEM #20');
+    console.log(compare.distinct(function(a, b) { return a.name !== b.name; }));
