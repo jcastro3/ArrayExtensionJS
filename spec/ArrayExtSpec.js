@@ -158,6 +158,7 @@ describe('Array Extension', function () {
             x = [{name:'ana', sex: 'f'}, {name:'fosto', sex: 'm'}, {name: 'jane', sex: 'f'}, {name: 'july', sex: 'f'}],
             skip3 = x.skip(3).each(function(x){ return x.name;}),
             skip2 = x.skip(2).each(function(x){ return x.name;}),
+            sex2 = x.take(2, function (x) { return x.sex === 'f'; }),
             emp = empty.skip(3);
 
         it('skip the first 2 names', function () {
@@ -247,34 +248,31 @@ describe('Array Extension', function () {
 
     });
 
-    describe('9. "LAST" returns last value or given spec', function () {
+    describe('9. "COUNT" counts  collection with given spec or returns length', function () {
         var x = [{name:'ana', sex: 'f'}, {name:'fosto', sex: 'm'}, {name: 'jane', sex: 'f'}, {name: 'july', sex: 'f'}],
             empty = [],
-            names = x.last().name,
-            spec1 = x.last(function(x) { return x.name !== 'july'}).name,
-            spec2 = empty.last();
+            size = x.count(),
+            spec1 = x.count(function(a) { return a.sex !== 'f'; }),
+            spec2 = x.count(function(a) { return a.sex !== 'm'; });
 
 
-        it('returns 1st value it finds ', function () {
-            expect(names).not.toBeNull();
-            expect(names).toBe('july');
-            expect(names).toNotBe('fosto');
 
+
+        it('returns length of collection ', function () {
+            expect(size).not.toBeNull();
+            expect(size).toBe(4);
         });
 
-        it('returns 1st value with given spec ', function () {
+        it('returns collection w/ give spec', function() {
             expect(spec1).not.toBeNull();
-            expect(spec1).toBe('jane');
-            expect(spec1).toNotBe('ana');
+            expect(spec2).not.toBeNull();
+            expect(spec1).toBe(1);
+            expect(spec2).toBe(3);
+            expect(spec1 && spec2).toNotEqual(NaN);
 
         });
 
-        it('returns null ', function () {
-            expect(spec2).toBeNull();
-            expect(spec2).toNotBe('ana');
-            expect(spec2).toNotBe('fosto');
 
-        });
 
     });
 
