@@ -174,12 +174,11 @@
     
     AEx.sum = function (spec) {
 
-        var exp = (isFunction(spec)) ? spec : nonFunction(spec),
-            i,
+        var i,
             sum = 0;
         for (i = 0; i < this.length; i += 1) {
-            if (isFunction(exp)) {
-                sum = sum + exp.call(this, this[i]);
+            if (isFunction(spec)) {
+                sum = sum + spec.call(this, this[i]);
             } else {
                 sum = sum + this[i];
             }

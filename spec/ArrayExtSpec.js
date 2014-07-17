@@ -280,31 +280,111 @@ describe('Array Extension', function () {
     describe('10. "INDEX" returns position in array of given spec or -1', function () {
         var x = [{name:'ana', sex: 'f'}, {name:'fosto', sex: 'm'}, {name: 'jane', sex: 'f'}, {name: 'july', sex: 'f'}],
             empty = [],
-            array = [1,3,44,66,88,100],
-            val1 = array.index(3),
-            val2 = array.index(1),
-            spec1 = x.index(function(a) { return a.sex !== 'f'; }),
-            spec2 = x.index(function(a) { return a.sex !== 'm'; });
+            array = [11,22,33,44,55],
+            val1 = array.index(22),
+            val2 = array.index(44),
+            val3 = array.index(111),
+            spec1 = x.index(function(a) { return a.name === 'ana'; }),
+            spec2 = x.index(function(a) { return a.name === 'july'; }),
+            spec3 = x.index(function(a) { return a.name === 'tony'; });
 
-//        console.log(val1);
-//        console.log(val2);
-//
-//
-//        it('returns index value ', function () {
-//            expect(val1 && val2).toNotBe(NaN);
-//            expect(val2 && val2).not.toBeNull();
-//            expect(val1).toBe(66);
-//            expect(3).toBe(3);
-//
-//        });
+        console.log(val1);
+        console.log(val2);
+
+
+        it('returns index value ', function () {
+            expect(val2 && val2).not.toBeNull();
+            expect(val1).toBe(1);
+            expect(val2).toBe(3);
+            expect(val1).not.toBe(2);
+            expect(val2).not.toBe(6);
+
+        });
+
+        it('should return -1 ', function () {
+            expect(val3).not.toBeNull();
+            expect(val3).toBe(-1);
+            expect(spec3).toBe(-1);
+            expect(val3).not.toBe(3);
+            expect(val3).not.toBe(2);
+            expect(val3).not.toBe(6);
+
+        });
+
+        it('returns index with provided spec ', function () {
+            expect(spec1 && spec2).not.toBeNull();
+            expect(spec1).toBe(0);
+            expect(spec2).toBe(3);
+            expect(spec1).not.toBe(3);
+            expect(spec1).not.toBe(2);
+            expect(spec2).not.toBe(5);
+
+        });
 
 
 
 
     });
 
+    describe('11. "PLUCK" des goes here', function() {
 
+        var x = [{name:'ana', sex: 'f'}, {name:'fosto', sex: 'm'}, {name: 'jane', sex: 'f'}, {name: 'july', sex: 'f'}],
+            y = [{car: 'ford'  , year: 1995}, {car: 'bmw'  , year: 2015}, {car: 'honda'  , year: 2005}],
+            spec1 = x.pluck('name'),
+            spec2 = x.pluck('sex'),
+            spec3 = y.pluck('car'),
+            spec4 = y.pluck('year');
+        it('returns property values object 1', function(){
+            expect(spec1 && spec2).not.toBeNull();
+            expect(spec1).toMatch('ana', 'fosto', 'jane', 'july');
+            expect(spec2).toMatch('f','m','f','f');
 
+        });
 
-    
+        it('returns property values object 2', function(){
+            expect(spec3 && spec4).not.toBeNull();
+            expect(spec3).toMatch('ford', 'bmw', 'honda');
+            expect(spec4).toMatch(1995, 2015, 2005);
+
+        });
+    });
+
+    describe('12. "SUM" des goes here', function () {
+        var arr = [11,22,33,44,55,66],
+            sum1 = arr.sum(),
+            sum2 = arr.sum(function (x){ return x *5});
+
+        it('should add all elements', function() {
+            expect(sum1).not.toBeNull();
+            expect(sum1).toBe(231);
+            expect(sum1).not.toBe(232);
+
+        });
+
+        it('should add all elements with given spec', function() {
+            expect(sum2).not.toBeNull();
+            expect(sum2).toBe(1155);
+            expect(sum2).not.toBe(1156)
+        })
+    });
+
+    describe('13, "MAX" des goes here', function() {
+        var arr = [1,32,4,54,5,233],
+            people = [[{name:'tony', age:24}, {name:'gabriela', age:17},{name:'july', age:25}]],
+            val1 = arr.max(),
+            spec1 = people.max(function(a, b){ return a.name.length - b.name.length;}).name,
+            spec2 = people.max(function(a,b) { return a.age - b.age; }).age;
+        it('should return max value' , function() {
+            expect(val1).not.toBeNull();
+            expect(val1).toBe(233);
+            expect(val1).toBeGreaterThan(232);
+            expect(val1).toBeLessThan(234);
+        })
+
+        it('should return biggest name', function() {
+            expect(spec1).toBe('gabriela');
+
+        })
+    });
+
 });
