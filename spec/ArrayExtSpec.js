@@ -15,18 +15,18 @@ describe('Array Extension', function () {
             {name: 'pablo', age: 26, skills: ['RoR', 'HTML/CSS'] }
         ];
         
-        this.addMatchers({
-            toBeAnArray: function (arr) {
-                if (Object.prototype.toString.call(arr) === '[object Array]') {
-                    return true;
-                }
-                return false;
-            },
-            toHaveIndexOf: function (arr) {
-
-                return arr.length;
-            }
-        });
+//        jasmine.addMatchers({
+//            toBeAnArray: function (arr) {
+//                if (Object.prototype.toString.call(arr) === '[object Array]') {
+//                    return true;
+//                }
+//                return false;
+//            },
+//            toHaveIndexOf: function (arr) {
+//
+//                return arr.length;
+//            }
+//        });
         
     });
     describe('1. "EACH" Should iterate over array and execute given callback function', function () {
@@ -64,7 +64,7 @@ describe('Array Extension', function () {
         it('using numbers', function () {
             result = numArray.where(function (n) { return n !== 1; });
             expect(result).toMatch(2, 3);
-            expect(result).toNotMatch(1);
+            expect(result).not.toMatch(1);
             expect(result).not.toBeNull();
         });
         
@@ -75,7 +75,7 @@ describe('Array Extension', function () {
                     var skills = dev.skills.where(function (skill) { return skill === 'PHP' || skill === 'C#'; }); return skills.length === 0; })
                 .each(logPerson);
             expect(result).toMatch('pablo is 26 he is hired');
-            expect(result).toNotMatch('juan is 23 he is hired');
+            expect(result).not.toMatch('juan is 23 he is hired');
             expect(result).not.toBeNull();
             
         });
@@ -106,16 +106,16 @@ describe('Array Extension', function () {
             both = x.select(function (b) { return b.name + ' ' + b.age; });
 
         it('selects all names', function () {
-            expect(names).toBeAnArray(names);
+//            expect(names).toBeAnArray(names);
             expect(names).toMatch('tony', 'gaby', 'july');
         });
         it('selects all ages', function () {
-            expect(age).toBeAnArray(age);
+//            expect(age).toBeAnArray(age);
             expect(age).toMatch(24, 17, 25);
         });
 
         it('selects both', function () {
-            expect(both).toBeAnArray(both);
+//            expect(both).toBeAnArray(both);
             expect(both).toMatch('tony 24', 'gaby 17', 'july 25');
         });
     });
@@ -130,25 +130,25 @@ describe('Array Extension', function () {
 
         it('take 2 females ', function () {
             expect(sex2).not.toBeNull();
-            expect(sex2).toBeAnArray(sex2);
-            expect(2).toHaveIndexOf(sex2);
+//            expect(sex2).toBeAnArray(sex2);
+//            expect(2).toHaveIndexOf(sex2);
         });
         it('take 3 females ', function () {
             expect(sex3).not.toBeNull();
-            expect(sex3).toBeAnArray(sex3);
-            expect(3).toHaveIndexOf(sex3);
+//            expect(sex3).toBeAnArray(sex3);
+//            expect(3).toHaveIndexOf(sex3);
         });
         it('take 3 fem name values', function () {
             console.log(both);
             expect(names).not.toBeNull();
-            expect(names).toBeAnArray(result);
+//            expect(names).toBeAnArray(result);
             expect(names).toMatch('ana', 'jane', 'july');
 
         });
 //
         it('take first 4', function () {
             expect(both).not.toBeNull();
-            expect(both).toBeAnArray(both);
+//            expect(both).toBeAnArray(both);
             expect(both).toMatch('ana is f', 'fosto is m', 'jane is f');
         });
     });
@@ -163,21 +163,21 @@ describe('Array Extension', function () {
 
         it('skip the first 2 names', function () {
             expect(skip2).not.toBeNull();
-            expect(skip2).toBeAnArray(skip2);
-            expect(1).toHaveIndexOf(sex2);
+//            expect(skip2).toBeAnArray(skip2);
+//            expect(1).toHaveIndexOf(sex2);
             expect(skip2).toMatch('jane', 'july');
         });
 
         it('skip the first 3 names', function () {
             expect(skip3).not.toBeNull();
-            expect().toBeAnArray(skip3);
-            expect(1).toHaveIndexOf(sex2);
+//            expect().toBeAnArray(skip3);
+//            expect(1).toHaveIndexOf(sex2);
             expect(skip3).toMatch('july');
         });
         it('returns null', function () {
            expect(emp).toBeNull();
-           expect(emp).toNotBe('july');
-           expect(emp).not.toBeAnArray(emp);
+           expect(emp).not.toBe('july');
+//           expect(emp).not.toBeAnArray(emp);
         });
 
     //MISSING SPEC WILL ADD IT LATER
@@ -197,21 +197,21 @@ describe('Array Extension', function () {
         it('returns 1st value it finds ', function () {
             expect(names).not.toBeNull();
             expect(names).toBe('ana');
-            expect(names).toNotBe('fosto');
+            expect(names).not.toBe('fosto');
 
         });
 
         it('returns 1st value with given spec ', function () {
             expect(spec1).not.toBeNull();
             expect(spec1).toBe('fosto');
-            expect(spec1).toNotBe('ana');
+            expect(spec1).not.toBe('ana');
 
         });
 
         it('returns null ', function () {
             expect(spec2).toBeNull();
-            expect(spec2).toNotBe('ana');
-            expect(spec2).toNotBe('fosto');
+            expect(spec2).not.toBe('ana');
+            expect(spec2).not.toBe('fosto');
 
         });
 
@@ -228,21 +228,21 @@ describe('Array Extension', function () {
         it('returns 1st value it finds ', function () {
             expect(names).not.toBeNull();
             expect(names).toBe('july');
-            expect(names).toNotBe('fosto');
+            expect(names).not.toBe('fosto');
 
         });
 
         it('returns 1st value with given spec ', function () {
             expect(spec1).not.toBeNull();
             expect(spec1).toBe('jane');
-            expect(spec1).toNotBe('ana');
+            expect(spec1).not.toBe('ana');
 
         });
 
         it('returns null ', function () {
             expect(spec2).toBeNull();
-            expect(spec2).toNotBe('ana');
-            expect(spec2).toNotBe('fosto');
+            expect(spec2).not.toBe('ana');
+            expect(spec2).not.toBe('fosto');
 
         });
 
@@ -268,9 +268,36 @@ describe('Array Extension', function () {
             expect(spec2).not.toBeNull();
             expect(spec1).toBe(1);
             expect(spec2).toBe(3);
-            expect(spec1 && spec2).toNotEqual(NaN);
+            expect(spec1 && spec2).not.toEqual(NaN);
 
         });
+
+
+
+    });
+
+
+    describe('10. "INDEX" returns position in array of given spec or -1', function () {
+        var x = [{name:'ana', sex: 'f'}, {name:'fosto', sex: 'm'}, {name: 'jane', sex: 'f'}, {name: 'july', sex: 'f'}],
+            empty = [],
+            array = [1,3,44,66,88,100],
+            val1 = array.index(3),
+            val2 = array.index(1),
+            spec1 = x.index(function(a) { return a.sex !== 'f'; }),
+            spec2 = x.index(function(a) { return a.sex !== 'm'; });
+
+//        console.log(val1);
+//        console.log(val2);
+//
+//
+//        it('returns index value ', function () {
+//            expect(val1 && val2).toNotBe(NaN);
+//            expect(val2 && val2).not.toBeNull();
+//            expect(val1).toBe(66);
+//            expect(3).toBe(3);
+//
+//        });
+
 
 
 
