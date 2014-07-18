@@ -14,22 +14,10 @@ describe('Array Extension', function () {
             {name: 'juan', age: 23, skills: ['PHP', 'Drink tea'] },
             {name: 'pablo', age: 26, skills: ['RoR', 'HTML/CSS'] }
         ];
-        
-//        jasmine.addMatchers({
-//            toBeAnArray: function (arr) {
-//                if (Object.prototype.toString.call(arr) === '[object Array]') {
-//                    return true;
-//                }
-//                return false;
-//            },
-//            toHaveIndexOf: function (arr) {
-//
-//                return arr.length;
-//            }
-//        });
+
         
     });
-    describe('1. "EACH" Should iterate over array and execute given callback function', function () {
+    describe('1. "EACH" ', function () {
         stringArray = ['SOS'];
         it('using strings ', function () {
             stringArray.each(function (x) { result += x; });
@@ -52,7 +40,7 @@ describe('Array Extension', function () {
         });
     });
     
-    describe('2. "WHERE" Creates a new array that contains all the elements that satisfies the given specification. ', function () {
+    describe('2. "WHERE"  ', function () {
         var cars = ['ford', 'mazda', 'honda', 'volkswagen', 'ferrari'];
         it('using strings', function () {
            result  = cars.where(function (brand) { return brand === 'ferrari'; });
@@ -81,7 +69,7 @@ describe('Array Extension', function () {
         });
     });
     
-    describe('3. "ANY" shall return a true value if any of the elements in the array satisfies the given spec ', function () {
+    describe('3. "ANY" c ', function () {
         var languages = ['php', 'c#', 'javascript', 'ruby', 'java'],
             falsy = languages.any(function (skill) { return skill === 'cobol'; }),
             truthy = languages.any(function (skill) { return skill === 'javascript'; }),
@@ -99,7 +87,7 @@ describe('Array Extension', function () {
         
     });
     
-    describe('4. "SELECT" Creates new collection containing the elements returned by the spec function', function () {
+    describe('4. "SELECT" ', function () {
         var x = [{name:'tony', age:24}, {name:'gaby', age:17},{name:'july', age:25}],
             names = x.select(function (n) { return n.name; }),
             age = x.select(function (a) { return a.age; }),
@@ -120,7 +108,7 @@ describe('Array Extension', function () {
         });
     });
     
-    describe('5. "TAKE" Returns new array containing howMany elements, they might be less but no more', function () {
+    describe('5. "TAKE" ', function () {
         var result = [],
             x = [{name:'ana', sex: 'f'}, {name:'fosto', sex: 'm'}, {name: 'jane', sex: 'f'}, {name: 'july', sex: 'f'}],
             names = x.take(3, function (x) { return x.sex === 'f'; }).each(function(x){ return x.name;}),
@@ -139,7 +127,6 @@ describe('Array Extension', function () {
 //            expect(3).toHaveIndexOf(sex3);
         });
         it('take 3 fem name values', function () {
-            console.log(both);
             expect(names).not.toBeNull();
 //            expect(names).toBeAnArray(result);
             expect(names).toMatch('ana', 'jane', 'july');
@@ -186,7 +173,7 @@ describe('Array Extension', function () {
     });
 
 
-    describe('7. "FIRST" returns first value or given spec', function () {
+    describe('7. "FIRST"', function () {
         var x = [{name:'ana', sex: 'f'}, {name:'fosto', sex: 'm'}, {name: 'jane', sex: 'f'}, {name: 'july', sex: 'f'}],
             empty = [],
             names = x.first().name,
@@ -217,7 +204,7 @@ describe('Array Extension', function () {
 
     });
 
-    describe('8. "LAST" returns last value or given spec', function () {
+    describe('8. "LAST"', function () {
         var x = [{name:'ana', sex: 'f'}, {name:'fosto', sex: 'm'}, {name: 'jane', sex: 'f'}, {name: 'july', sex: 'f'}],
             empty = [],
             names = x.last().name,
@@ -248,7 +235,7 @@ describe('Array Extension', function () {
 
     });
 
-    describe('9. "COUNT" counts  collection with given spec or returns length', function () {
+    describe('9. "COUNT"', function () {
         var x = [{name:'ana', sex: 'f'}, {name:'fosto', sex: 'm'}, {name: 'jane', sex: 'f'}, {name: 'july', sex: 'f'}],
             empty = [],
             size = x.count(),
@@ -277,7 +264,7 @@ describe('Array Extension', function () {
     });
 
 
-    describe('10. "INDEX" returns position in array of given spec or -1', function () {
+    describe('10. "INDEX"', function () {
         var x = [{name:'ana', sex: 'f'}, {name:'fosto', sex: 'm'}, {name: 'jane', sex: 'f'}, {name: 'july', sex: 'f'}],
             empty = [],
             array = [11,22,33,44,55],
@@ -326,7 +313,7 @@ describe('Array Extension', function () {
 
     });
 
-    describe('11. "PLUCK" des goes here', function() {
+    describe('11. "PLUCK"', function() {
 
         var x = [{name:'ana', sex: 'f'}, {name:'fosto', sex: 'm'}, {name: 'jane', sex: 'f'}, {name: 'july', sex: 'f'}],
             y = [{car: 'ford'  , year: 1995}, {car: 'bmw'  , year: 2015}, {car: 'honda'  , year: 2005}],
@@ -334,14 +321,20 @@ describe('Array Extension', function () {
             spec2 = x.pluck('sex'),
             spec3 = y.pluck('car'),
             spec4 = y.pluck('year');
-        it('returns property values object 1', function(){
-            expect(spec1 && spec2).not.toBeNull();
+        it('display name property', function(){
+            expect(spec1).not.toBeNull();
             expect(spec1).toMatch('ana', 'fosto', 'jane', 'july');
+
+
+        });
+
+        it('display gender property', function(){
+            expect(spec2).not.toBeNull();
             expect(spec2).toMatch('f','m','f','f');
 
         });
 
-        it('returns property values object 2', function(){
+        it('display car properties', function(){
             expect(spec3 && spec4).not.toBeNull();
             expect(spec3).toMatch('ford', 'bmw', 'honda');
             expect(spec4).toMatch(1995, 2015, 2005);
@@ -349,42 +342,234 @@ describe('Array Extension', function () {
         });
     });
 
-    describe('12. "SUM" des goes here', function () {
+    describe('12. "SUM"', function () {
         var arr = [11,22,33,44,55,66],
             sum1 = arr.sum(),
             sum2 = arr.sum(function (x){ return x *5});
 
-        it('should add all elements', function() {
+        it('add all elements', function() {
             expect(sum1).not.toBeNull();
             expect(sum1).toBe(231);
             expect(sum1).not.toBe(232);
 
         });
 
-        it('should add all elements with given spec', function() {
+        it('add all elements with given spec', function() {
             expect(sum2).not.toBeNull();
             expect(sum2).toBe(1155);
             expect(sum2).not.toBe(1156)
         })
     });
 
-    describe('13, "MAX" des goes here', function() {
+    describe('13, "MAX" ', function() {
         var arr = [1,32,4,54,5,233],
-            people = [[{name:'tony', age:24}, {name:'gabriela', age:17},{name:'july', age:25}]],
+            people = [{name:'tony', age:24}, {name:'gabriela', age:17},{name:'july', age:25}],
             val1 = arr.max(),
-            spec1 = people.max(function(a, b){ return a.name.length - b.name.length;}).name,
-            spec2 = people.max(function(a,b) { return a.age - b.age; }).age;
-        it('should return max value' , function() {
+            spec1 = people.max(function (a,b) { return a.name.length - b.name.length;}).name,
+            spec2 = people.max(function(a,b) { return a.age - b.age; }).name;
+        it('max value' , function() {
             expect(val1).not.toBeNull();
             expect(val1).toBe(233);
             expect(val1).toBeGreaterThan(232);
             expect(val1).toBeLessThan(234);
+            expect(typeof val1).toBe('number');
         })
 
-        it('should return biggest name', function() {
+        it('max by name', function() {
+            expect(spec1).not.toBeNull();
             expect(spec1).toBe('gabriela');
+            expect(typeof spec1).toBe('string');
+        })
 
+        it('max by age', function() {
+            expect(spec2).not.toBeNull();
+            expect(spec2).toBe('july');
+            expect(typeof spec2).toBe('string');
         })
     });
 
+
+
+    describe('14, "MIN" ', function() {
+        var arr = [1,32,4,54,5,233],
+            people = [{name:'tony', age:24}, {name:'gabriela', age:17},{name:'julia', age:25}],
+            val1 = arr.min(),
+            spec1 = people.min(function (a,b) { return a.name.length - b.name.length;}).name,
+            spec2 = people.min(function(a,b) { return a.age - b.age; }).name;
+        it('smallest by value' , function() {
+            expect(val1).not.toBeNull();
+            expect(val1).toBe(1);
+            expect(val1).toBeGreaterThan(0);
+            expect(val1).toBeLessThan(2);
+            expect(typeof val1).toBe('number');
+        })
+
+        it('smallest by name', function() {
+            expect(spec1).not.toBeNull();
+            expect(spec1).toBe('tony');
+            expect(typeof spec1).toBe('string');
+        })
+
+        it('smallest by age', function() {
+            expect(spec2).not.toBeNull();
+            expect(spec2).toBe('gabriela');
+            expect(typeof spec2).toBe('string');
+        })
+    });
+
+    describe('15. "FLATTEN" ', function() {
+        var arr = [1,[32,[4,54]],[5,233,4,2], [4]],
+            flat = arr.flatten();
+
+        it('flatten array' , function() {
+            expect(flat).not.toBeNull();
+            expect(typeof flat).toBe('object');
+            expect(flat).toMatch(1,32,4,54,5,233,4,2,4);
+        })
+
+    });
+
+    describe('16. "By Ascending"', function() {
+        var names = [{name:'tony'}, {name:'gabriela'},{name:'julia'},{name:'ana'}],
+            year = [{year:1700},{ year:2800},{year:2400},{year:1900}],
+            ascending_name = [{name:'ana'}, {name:'gabriela'},{name:'julia'},{name:'tony'}],
+            ascending_year = [{year:2800},{ year:2400},{year:1900},{year:1700}],
+
+            res1 = names.orderByAsc('name'),
+            res2 = year.orderByAsc('year'),
+            noProp1 = names.orderByDesc('last'),
+            noProp2 = year.orderByDesc('type');;
+
+        it('name by ascending', function() {
+            expect(res1).not.toBeNull();
+            expect(res1).toEqual(ascending_name);
+
+        })
+
+        it('year by ascending', function() {
+            expect(res2).not.toBeNull();
+            expect(res2).toEqual(ascending_year);
+        })
+
+        it('should be null', function (){
+            expect(noProp1).toBeNull();
+            expect(noProp2).toBeNull();
+        })
+
+    });
+
+
+    describe('17. "By Descending"', function() {
+        var arr1 = [{name:'tony', age:24}, {name:'gabriela', age:17},{name:'julia', age:25},{name:'ana', age:21}],
+            arr2 = [{name:'tony', age:24}, {name:'gabriela', age:17},{name:'julia', age:25},{name:'ana', age:21}],
+            empty = [],
+            descending_name = [{name:'tony', age:24},{name:'julia', age:25}, {name:'gabriela', age:17}, {name:'ana', age:21}],
+            descending_age = [{name:'julia', age:25}, {name:'tony', age:24},{name:'ana', age:21},{name:'gabriela', age:17}],
+            res1 = arr1.orderByDesc('name'),
+            res2 = arr2.orderByDesc('age'),
+            noProp1 = arr1.orderByDesc('years'),
+            noProp2 = arr2.orderByDesc('years');
+        it('name by descending', function() {
+            expect(res1).not.toBeNull();
+            expect(typeof res1).toBe('object')
+            expect(res1).toEqual(descending_name);
+        })
+
+        it('age by descending', function() {
+            expect(res2).not.toBeNull();
+            expect(typeof res1).toBe('object')
+            expect(res2).toEqual(descending_age);
+        })
+
+
+        it('should be null', function (){
+            expect(noProp1).toBeNull();
+            expect(noProp2).toBeNull();
+        })
+
+
+    });
+
+
+    describe('18. "First or Default"', function() {
+        var people = [{name:'tony', age:24}, {name:'gabriela', age:25},{name:'julia', age:25},{name:'ana', age:21}],
+            empty = [],
+            res1 = people.firstOrDefault(function(a) { return a.age === 25; }).name,
+            res2 = people.firstOrDefault(function(a) { return a.age === 122;}),
+            res3 = people.firstOrDefault(function(a) {return a.name === 'julia'}).name,
+            res4 = people.firstOrDefault(function(a) {return a.name === 'panchita'});
+        it('first found number', function() {
+            expect(res1).not.toBeNull();
+            expect(res1).not.toBe('julia');
+            expect(res1).toBe('gabriela');
+        })
+
+        it('not found number', function() {
+            expect(res2).toBeNull();
+            expect(res2).not.toMatch(24);
+            expect(res2).not.toMatch(25);
+            expect(res2).not.toMatch(21);
+        })
+
+        it('first found string', function() {
+            expect(res3).not.toBeNull();
+            expect(res3).toBe('julia');
+
+        })
+
+        it('not found string', function() {
+            expect(res4).toBeNull();
+        })
+
+
+    });
+
+
+    describe('19. "Last or Default"', function() {
+        var people = [{name:'tony', age:24}, {name:'gabriela', age:25},{name:'juan', age:25},{name:'julia', age:25},{name:'ana', age:21}],
+            empty = [],
+            res1 = people.lastOrDefault(function(a) { return a.age === 25; }).name,
+            res2 = people.lastOrDefault(function(a) { return a.age === 122;}),
+            res3 = people.lastOrDefault(function(a) {return a.age === 25}).name,
+            res4 = people.lastOrDefault(function(a) {return a.name === 'panchita'});
+        it('first found number', function() {
+            expect(res1).not.toBeNull();
+            expect(res1).not.toBe('gabriela');
+            expect(res1).toBe('julia');
+        })
+
+        it('not found number', function() {
+            expect(res2).toBeNull();
+            expect(res2).not.toMatch(24);
+            expect(res2).not.toMatch(25);
+            expect(res2).not.toMatch(21);
+        })
+
+        it('first found string', function() {
+            expect(res3).not.toBeNull();
+            expect(res3).toBe('julia');
+
+        })
+
+        it('not found string', function() {
+            expect(res4).toBeNull();
+        })
+
+
+    });
+
+//    console.log('PROBLEM #16');
+//    console.log(people.orderByAsc('name'));
+//
+//    console.log('PROBLEM #17');
+//    console.log(children.orderByDesc('name'));
+//
+//    console.log('PROBLEM #18');
+//    console.log(people.firstOrDefault(function(a){ return a.age === 20; }));
+//    console.log('PROBLEM #19');
+//    console.log(people.lastOrDefault(function(a){ return a.name === 5; }));
+//
+//    var compare = [{name: 'tony'}, {name: 'july'}, {name: 'tony'}];
+//    console.log('PROBLEM #20');
+//    console.log(compare.distinct(function(a, b) { return a.name !== b.name; }));
 });

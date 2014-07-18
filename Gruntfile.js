@@ -6,7 +6,7 @@ module.exports = function (grunt) {
 
             options: {
                 specs: "spec/**.js",
-                vendor: "lib/**/*.js"
+                vendor: "lib/**.js"
             }
         }
 

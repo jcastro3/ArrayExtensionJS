@@ -241,18 +241,18 @@
         if (!this[0].hasOwnProperty(propName)) {
             return null;
         }
-        var order = []; //change buffer name
-        order = this.sort(
+        var ascOrder = []; //change buffer name
+        ascOrder = this.sort(
             function (a, b) {
                 
                 if (typeof a[propName] === 'string') {
                     return (a[propName] < b[propName]) ? -1 : (a[propName] > b[propName]) ? 1 : 0;
                 } else {
-                    return a[propName] - b[propName];
+                    return b[propName] - a[propName];
                 }
             }
         );
-        return order;
+        return ascOrder;
     };
     //
     AEx.orderByDesc = function (propName) {
@@ -277,6 +277,10 @@
     AEx.firstOrDefault = function (spec) {
 //            will get first element that satisfies  the condition if not vallue is faound then defaul will be return
         var i;
+
+        if (!this.length) {
+            return null;
+        }
         for (i = 0; i < this.length; i += 1) {
             if (spec.call(this, this[i])) {
                 return this[i];
@@ -287,6 +291,10 @@
     
     AEx.lastOrDefault = function (spec) {
         var i;
+
+        if (!this.length) {
+            return null;
+        }
         for (i = this.length - 1; i > 0; i -= 1) {
             if (spec.call(this, this[i])) {
                 return this[i];
